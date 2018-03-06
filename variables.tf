@@ -16,10 +16,6 @@ variable "tags" {
 }
 
 # Networking
-variable "subnet_id" {
-  type        = "string"
-  description = "ID of the subnet to join"
-}
 variable "network_interface_ids" {
   type        = "list"
   description = "List of network interface ids"

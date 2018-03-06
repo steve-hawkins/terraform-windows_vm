@@ -1,10 +1,5 @@
-resource "random_id" "diagnostics" {
-  prefix      = "${var.vm_name_prefix}"
-  byte_length = 3
-}
-
 resource "azurerm_storage_account" "diagnostics" {
-  name                      = "${random_id.diagnostics.hex}"
+  name                      = "${var.vm_name_prefix}"
   resource_group_name       = "${var.resource_group_name}"
   location                  = "${var.location}"
   account_tier              = "Standard"
