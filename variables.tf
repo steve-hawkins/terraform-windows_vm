@@ -124,22 +124,22 @@ variable "domain_name" {
   description = "Name of the domain to be joinned to"
 }
 
-variable "OU_path" {
+variable "ou_path" {
   type        = "string"
   description = "OU to be used for this machine for domain joinning"
 }
 
-variable "OU_User" {
+variable "ou_user" {
   type        = "string"
   description = "User to domain join the machine"
 }
 
-variable "OU_User_Domain" {
+variable "ou_user_domain" {
   type        = "string"
   description = "Domain to join the machine with, often attached to domain user"
 }
 
-variable "OU_user_pass" {
+variable "ou_user_pass" {
   type        = "string"
   description = "Password of the OU User"
 }
