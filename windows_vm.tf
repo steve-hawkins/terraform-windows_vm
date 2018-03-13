@@ -95,18 +95,18 @@ resource "azurerm_virtual_machine_extension" "windows_vm" {
 
   settings = <<-SETTINGS
     {
-        "Name": "${var.domain_name}",
-        "OUPath": "${var.OU_path}",
-        "User": "${var.OU_User_Domain}\\${var.OU_User}",
-        "Restart": "true",
-        "Options": "3"
+      "Name": "${var.domain_name}",
+      "OUPath": "${var.ou_path}",
+      "User": "${var.ou_user_domain}\\${var.ou_user}",
+      "Restart": "true",
+      "Options": "3"
     }
   SETTINGS
 
   protected_settings = <<-PROTECTED
-  {
-        "Password": "${var.OU_user_pass}"
-  }
+    {
+      "Password": "${var.ou_user_pass}"
+    }
   PROTECTED
 
   tags = "${var.tags}"
