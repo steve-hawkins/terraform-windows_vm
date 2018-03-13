@@ -3,12 +3,15 @@ variable "resource_group_name" {
   type        = "string"
   description = "Name of the resource group"
 }
+
 variable "location" {
   type        = "string"
   description = "Azure region all the resources will be deployed to"
 }
+
 variable "tags" {
-  type        = "map"
+  type = "map"
+
   description = <<-HEREDOC
   Everything should be tagged, for guidance see:-
   https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-manager-subscription-governance#resource-tags
@@ -20,6 +23,7 @@ variable "network_interface_ids" {
   type        = "list"
   description = "List of network interface ids"
 }
+
 variable "availability_set_id" {
   type        = "string"
   default     = ""
@@ -31,19 +35,24 @@ variable "vm_name_prefix" {
   type        = "string"
   description = "Prefix to the name of the VMs to create in the scale set"
 }
+
 variable "vm_count" {
   type        = "string"
   description = "How many VMs would you like?"
 }
+
 variable "vm_size" {
-  type        = "string"
+  type = "string"
+
   description = <<-HEREDOC
   Select the size of the VMs to create:-
   https://docs.microsoft.com/en-us/azure/virtual-machines/windows/sizes
   HEREDOC
 }
+
 variable "vm_image" {
-  type        = "map"
+  type = "map"
+
   description = <<-HEREDOC
     Can either be a reference to an Azure Marketplace image:-
     https://docs.microsoft.com/en-us/azure/virtual-machines/windows/cli-ps-findimage
@@ -64,60 +73,73 @@ variable "vm_image" {
       }
   HEREDOC
 }
+
 variable "vm_immutable_os_disk" {
   type        = "string"
   default     = true
   description = "Delete managed OS disk when you delete the VM"
 }
+
 variable "vm_immutable_data_disk" {
   type        = "string"
   default     = true
   description = "Delete managed data disk when you delete the VM"
 }
+
 variable "vm_os_disk_type" {
   type        = "string"
   default     = "Premium_LRS"
   description = "Premium_LRS is recommended"
 }
+
 variable "vm_data_disk_type" {
   type        = "string"
   default     = "Premium_LRS"
   description = "Premium_LRS or Standard_LRS"
 }
+
 variable "vm_data_disk_size" {
   type        = "string"
   default     = 10
   description = "Size of the data disk in GB"
 }
+
 variable "vm_admin_username" {
   type        = "string"
   description = "Username for the local administrator account"
 }
+
 variable "vm_admin_password" {
   type        = "string"
   description = "Password for the local administrator account"
 }
+
 variable "vm_init_script" {
   type        = "string"
   description = "PowerShell script to initialise the VM"
 }
+
 variable "domain_name" {
   type        = "string"
   description = "Name of the domain to be joinned to"
 }
+
 variable "OU_path" {
- type        =  "string"
- description = "OU to be used for this machine for domain joinning"
+  type        = "string"
+  description = "OU to be used for this machine for domain joinning"
 }
+
 variable "OU_User" {
-  type       = "string"
-  description= "User to domain join the machine"
+  type        = "string"
+  description = "User to domain join the machine"
 }
+
 variable "OU_User_Domain" {
-  type       = "string"
-  description= "Domain to join the machine with, often attached to domain user"
+  type        = "string"
+  description = "Domain to join the machine with, often attached to domain user"
 }
+
 variable "OU_user_pass" {
-  type       = "string"
-  description= "Password of the OU User"
+  type        = "string"
+  description = "Password of the OU User"
 }
