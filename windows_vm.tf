@@ -18,7 +18,7 @@ data "template_file" "auto_logon" {
   }
 }
 
-resource "azurerm_virtual_machine" "masters" {
+resource "azurerm_virtual_machine" "windows_vm" {
   count               = "${var.vm_count}"
   name                = "${var.vm_name_prefix}-${format("%02d", count.index)}"
   location            = "${var.location}"
@@ -79,6 +79,35 @@ resource "azurerm_virtual_machine" "masters" {
     enabled     = true
     storage_uri = "${azurerm_storage_account.diagnostics.primary_blob_endpoint}"
   }
+
+  tags = "${var.tags}"
+}
+
+resource "azurerm_virtual_machine_extension" "windows_vm" {
+  count                = "${var.vm_count}"
+  name                 = "${var.vm_name_prefix}-${format("%02d", count.index)}"
+  location             = "${var.location}"
+  resource_group_name  = "${var.resource_group_name}"
+  virtual_machine_name = "${element(azurerm_virtual_machine.windows_vm.*.name, count.index)}"
+  publisher            = "Microsoft.Compute"
+  type                 = "JsonADDomainExtension"
+  type_handler_version = "1.3"
+
+  settings = <<-SETTINGS
+    {
+        "Name": "${var.domain_name}",
+        "OUPath": "${var.OU_path}",
+        "User": "${var.OU_User_Domain}\\${var.OU_User}",
+        "Restart": "true",
+        "Options": "3"
+    }
+  SETTINGS
+
+  protected_settings = <<-PROTECTED
+  {
+        "Password": "${var.OU_user_pass}"
+  }
+  PROTECTED
 
   tags = "${var.tags}"
 }
