@@ -1,5 +1,5 @@
 resource "azurerm_storage_account" "diagnostics" {
-  name                      = "${var.vm_name_prefix}"
+  name                      = "${replace(var.vm_name_prefix, "/-/", "")}"
   resource_group_name       = "${var.resource_group_name}"
   location                  = "${var.location}"
   account_tier              = "Standard"
@@ -84,8 +84,8 @@ resource "azurerm_virtual_machine" "windows_vm" {
 }
 
 resource "azurerm_virtual_machine_extension" "windows_vm" {
-  count                = "${var.vm_count}"
-  name                 = "${var.vm_name_prefix}-${format("%02d", count.index)}"
+  count                = "${var.domain_join == true ? 0 : var.vm_count}"
+  name                 = "domain-join"
   location             = "${var.location}"
   resource_group_name  = "${var.resource_group_name}"
   virtual_machine_name = "${element(azurerm_virtual_machine.windows_vm.*.name, count.index)}"

@@ -119,27 +119,38 @@ variable "vm_init_script" {
   description = "PowerShell script to initialise the VM"
 }
 
+variable "domain_join" {
+  type        = "string"
+  default     = false
+  description = "Enable to join the VM to a Active Directory domain"
+}
+
 variable "domain_name" {
   type        = "string"
-  description = "Name of the domain to be joinned to"
+  default     = ""
+  description = "Name of the domain to join the VM to"
 }
 
 variable "ou_path" {
   type        = "string"
-  description = "OU to be used for this machine for domain joinning"
-}
-
-variable "ou_user" {
-  type        = "string"
-  description = "User to domain join the machine"
+  default     = ""
+  description = "OU Path where the Computer Account will be located in the domain"
 }
 
 variable "ou_user_domain" {
   type        = "string"
+  default     = ""
   description = "Domain to join the machine with, often attached to domain user"
+}
+
+variable "ou_user" {
+  type        = "string"
+  default     = ""
+  description = "User to domain join the machine"
 }
 
 variable "ou_user_pass" {
   type        = "string"
+  default     = ""
   description = "Password of the OU User"
 }
