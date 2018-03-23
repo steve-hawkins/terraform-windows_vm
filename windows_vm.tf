@@ -84,7 +84,7 @@ resource "azurerm_virtual_machine" "windows_vm" {
 }
 
 resource "azurerm_virtual_machine_extension" "windows_vm" {
-  count                = "${var.domain_join == true ? 0 : var.vm_count}"
+  count                = "${var.domain_join == true ? var.vm_count : 0}"
   name                 = "domain-join"
   location             = "${var.location}"
   resource_group_name  = "${var.resource_group_name}"
