@@ -1,4 +1,5 @@
 resource "azurerm_storage_account" "diagnostics" {
+  count                     = "${var.vm_count}"
   name                      = "${replace(var.vm_name_prefix, "/-/", "")}"
   resource_group_name       = "${var.resource_group_name}"
   location                  = "${var.location}"
@@ -10,6 +11,7 @@ resource "azurerm_storage_account" "diagnostics" {
 }
 
 data "template_file" "auto_logon" {
+  count    = "${var.vm_count}"
   template = "${file("${path.module}/tpl.auto_logon.xml")}"
 
   vars {
