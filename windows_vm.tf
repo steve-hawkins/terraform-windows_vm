@@ -11,6 +11,7 @@ resource "azurerm_storage_account" "diagnostics" {
 }
 
 data "template_file" "auto_logon" {
+  count    = "${var.vm_count}"
   template = "${file("${path.module}/tpl.auto_logon.xml")}"
 
   vars {
