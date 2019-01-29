@@ -56,6 +56,10 @@ resource "azurerm_virtual_machine" "windows_vm" {
     admin_username = "${var.vm_admin_username}"
     admin_password = "${var.vm_admin_password}"
     custom_data    = "${var.vm_init_script}"
+
+    lifecycle {
+      ignore_changes = true
+    }
   }
 
   os_profile_windows_config {
@@ -74,6 +78,10 @@ resource "azurerm_virtual_machine" "windows_vm" {
       component    = "Microsoft-Windows-Shell-Setup"
       setting_name = "FirstLogonCommands"
       content      = "${file("${path.module}/tpl.first_logon_commands.xml")}"
+    }
+
+    lifecycle {
+      ignore_changes = true
     }
   }
 
